@@ -33,4 +33,13 @@ je loop_exit
 incl %edi                           # load next value
 movl data_items(,%edi,4), %eax
 cmpl %ebx, %eax                     # compare values
-jle start_loop                      # jump to loop beginning if the new
+jle start_loop                      # jump to loop beginning if the new one isn’t bigger
+
+
+movl %eax, %ebx                     # move the value as the largest
+jmp start_loop                      # jump to loop beginning
+loop_exit:
+                                    # %ebx is the status code for the exit system call
+                                    # and it already has the maximum number
+movl $1, %eax                       #1 is the exit() syscall
+int $0x80
