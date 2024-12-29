@@ -1,0 +1,3 @@
+as --32 -o power.o power.s
+ld -m elf_i386 -o power power.o
+./power
